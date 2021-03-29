@@ -17,12 +17,14 @@ async def getHTML():
             html = await response.text()
             soup = BeautifulSoup(html, 'html.parser')
 
-            print(soup.find_all('div', {'class':'tracker-item'}))
+            # soup.find_all('div', {'class':'tracker-item'})
+            return soup
             ##Checar se coloca aqui ou em outro arquivo essa busca do find_all
 
 def main():
     loop = asyncio.get_event_loop()
-    loop.run_until_complete(getHTML())
+    infos = loop.run_until_complete(getHTML())
+    return infos
 
 if __name__ == '__main__':
     main()
