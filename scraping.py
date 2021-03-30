@@ -22,6 +22,8 @@ async def getHTML():
             ##Checar se coloca aqui ou em outro arquivo essa busca do find_all
 
 def main():
+    """Traz de maneira assíncrona os dados da página buscada,
+        ele retorna em formato HTML pelo BeautifulSoup."""
     loop = asyncio.get_event_loop()
     infos = loop.run_until_complete(getHTML())
     return infos
