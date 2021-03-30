@@ -10,8 +10,10 @@ def busca_divs(html):
 async def get_name(div):
     try:
         info_name = div.find_all('div', {'class':'item__title'})
-        pos_final = len(info_name[0])-2
-        nome_formatado = info_name[0][2:pos_final]
+        
+        name_str = str(info_name[0].text)
+        pos_final = len(name_str)-1
+        nome_formatado = name_str[1:pos_final]
         return nome_formatado
     except:
         print('Erro no processamento de nome')
@@ -27,7 +29,9 @@ async def get_brand(div):
 async def get_price(div):
     try:
         info_price = div.find_all('span', {'class':'price'})
-        return info_price[0].text
+        str_price =  str(info_price[0].text)
+        price = str_price ###Preciso usar o regex aqui acho
+        return price
     except KeyError:
         print('Erro no processamento de preço')
     
@@ -55,7 +59,8 @@ def get_all_infos(divs):
 def main(html):
     divs = busca_divs(html)
     get_all_infos(divs)
-    print(array_infos)
+    for info in array_infos:
+        print(info, '\n')
 
     return array_infos
 
