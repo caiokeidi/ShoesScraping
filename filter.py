@@ -1,5 +1,6 @@
 import bs4
 import asyncio
+import re
 
 array_infos = []
 
@@ -30,8 +31,10 @@ async def get_price(div):
     try:
         info_price = div.find_all('span', {'class':'price'})
         str_price =  str(info_price[0].text)
-        price = str_price ###Preciso usar o regex aqui acho
-        return price
+        price_regex = re.findall('[-+]?\d*\.?\d+|\d+', str_price)
+        ###Pode ser interessante mudar e entender melhor esse regex
+        price = price_regex[0] + '.' + price_regex[1]
+        return float(price)
     except KeyError:
         print('Erro no processamento de preço')
     
