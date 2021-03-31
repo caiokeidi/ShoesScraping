@@ -17,9 +17,9 @@ async def getHTML():
             html = await response.text()
             soup = BeautifulSoup(html, 'html.parser')
 
-            # soup.find_all('div', {'class':'tracker-item'})
+            
             return soup
-            ##Checar se coloca aqui ou em outro arquivo essa busca do find_all
+            
 
 def main():
     """Traz de maneira assíncrona os dados da página buscada,

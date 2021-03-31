@@ -1,6 +1,7 @@
 import bs4
 import asyncio
 import re
+from datetime import date
 from get_functions import get_link, get_brand, get_name, get_price
 
 array_infos = []
@@ -15,6 +16,7 @@ async def get_info(div):
     for key, function in info_to_filter.items():
         valor = await function(div)
         info[key] = valor
+    info['data'] = date.today().isoformat()
     array_infos.append(info)
 
 
