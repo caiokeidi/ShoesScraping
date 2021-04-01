@@ -11,7 +11,8 @@ def create_tables():
             data DATE NOT NULL ,
             marca VARCHAR(25),
             nome VARCHAR(150),
-            preco DECIMAL(6,2)
+            preco DECIMAL(6,2),
+            link VARCHAR(200)
         )
         """,)
     conn = None

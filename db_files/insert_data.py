@@ -9,8 +9,9 @@ def insert_data(data):
         DATA, 
         MARCA,
         NOME,
-        PRECO) 
-        VALUES (%s, %s, %s, %s
+        PRECO,
+        LINK) 
+        VALUES (%s, %s, %s, %s, %s
     )
         """,)
     conn = None
@@ -26,7 +27,8 @@ def insert_data(data):
             cur.execute(command, (data['data'], 
         data['marca'], 
         data['nome'], 
-        data['preco'], 
+        data['preco'],
+        data['link'] 
         ))
             
         cur.close()
