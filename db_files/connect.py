@@ -1,4 +1,4 @@
-from config import config
+from . import config
 import psycopg2
 
 def connect():

@@ -5,11 +5,12 @@ import asyncio
 import aiohttp
 from bs4 import BeautifulSoup
 
-URL = 'https://www.glami.com.br/calcados-femininos/'
 
-async def getHTML():
+arrHtmls = []
+
+async def getHTML(url):
     async with aiohttp.ClientSession() as session:
-        async with session.get(URL) as response:
+        async with session.get(url) as response:
 
             print("Status:", response.status)
             print("Content-type:", response.headers['content-type'])
@@ -17,16 +18,19 @@ async def getHTML():
             html = await response.text()
             soup = BeautifulSoup(html, 'html.parser')
 
-            
+            arrHtmls.append(soup)
             return soup
             
 
-def main():
+def main(urls):
     """Traz de maneira assíncrona os dados da página buscada,
         ele retorna em formato HTML pelo BeautifulSoup."""
     loop = asyncio.get_event_loop()
-    infos = loop.run_until_complete(getHTML())
-    return infos
+    links_scraps = [getHTML(url) for url in urls]
+    wait_scraps = asyncio.wait(links_scraps)
+    infos = loop.run_until_complete(wait_scraps)
+
+    return arrHtmls
 
 if __name__ == '__main__':
     main()

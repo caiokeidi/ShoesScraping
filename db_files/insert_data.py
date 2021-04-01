@@ -1,5 +1,6 @@
 import psycopg2
-from config import config
+from . import config
+import asyncio
 
 def insert_data(data):
     commands = (
@@ -13,6 +14,7 @@ def insert_data(data):
     )
         """,)
     conn = None
+    records = None
     try:
         
         params = config()
@@ -26,15 +28,19 @@ def insert_data(data):
         data['nome'], 
         data['preco'], 
         ))
-        
+            
         cur.close()
         
         conn.commit()
+        return records
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
+        return(error)
     finally:
         if conn is not None:
             conn.close()
+        
+        return records
 
 
 if __name__ == '__main__':

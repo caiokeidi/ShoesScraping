@@ -30,11 +30,12 @@ def get_all_infos(divs):
     # loop.close()
     return res
 
-def main(html):
-    divs = busca_divs(html)
-    get_all_infos(divs)
-    for info in array_infos:
-        print(info, '\n')
+def main(htmls):
+    for html in htmls:
+        divs = busca_divs(html)
+        get_all_infos(divs)
+    # for info in array_infos:
+    #     print(info, '\n')
 
     return array_infos
 
