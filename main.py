@@ -3,6 +3,7 @@ import scrapingSynchronous
 import filter 
 import time
 from send_data import send_all_data
+from send_data2 import send_all_data2
 from get_urls import get_urls
 from db_files_async import insert_asyncpg
 
@@ -11,13 +12,13 @@ from db_files_async import insert_asyncpg
 def main():
     start = time.time()
 
-    urls = get_urls(5)
+    urls = get_urls(1)
     htmls = scraping.main(urls)
-    #htmls = scrapingSynchronous.main(urls)
+
 
     infos = filter.main(htmls)
-    insert_asyncpg.main(infos)
-    #res = send_all_data(infos)
+    res = send_all_data2(infos)
+    # res = send_all_data(infos)
 
     elapsed = time.time() - start
     print(f'tempo: {elapsed}')
