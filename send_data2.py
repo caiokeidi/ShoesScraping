@@ -14,6 +14,7 @@ async def send_data2(infos):
     await insert_datas()
     
 def send_all_data2(infos):
+    """Envia dados para uma API que lida com a DB"""
     loop = asyncio.get_event_loop()
     datas_send = [send_data2(infos)]
     wait_send = asyncio.wait(datas_send)
